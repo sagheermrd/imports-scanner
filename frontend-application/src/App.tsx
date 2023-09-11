@@ -19,12 +19,11 @@ function App() {
       },
       body: JSON.stringify(data),
     });
-
-    const jsonResponse = await response.json();
-    if (jsonResponse.ok) {
-      setLib(jsonResponse);
+    const responseJson = await response.json();
+    if (response.ok) {
+      setLib(responseJson);
     } else {
-      toast.error(jsonResponse.message ?? 'An error occured, contact support service')
+      toast.error(responseJson.message ?? 'An error occured, contact support service')
     }
   };
 
