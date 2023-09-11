@@ -6,7 +6,7 @@ import type { DataNode } from 'antd/es/tree';
 
 function App() {
   const [form] = Form.useForm();
-  const [lib, setLib] = useState<ScanImportsResponseDto>();
+  const [lib, setLib] = useState<ImportsResponseDto>();
 
   const onFinish = async (form: any) => {
     const data = {

@@ -3,7 +3,7 @@ type TreeDto = {
   children: TreeDto[];
 };
 
-interface ScanImportsResponseDto {
+interface ImportsResponseDto {
   rootfile?: string;
   data: TreeDto[];
 }

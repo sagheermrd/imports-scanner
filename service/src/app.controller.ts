@@ -5,15 +5,16 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import { AppService } from './app.service';
+import { CreateDto } from 'dto/common';
 
 @Controller('/api')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Post('/scan-imports')
-  scanImports(@Body('sourceDirectory') sourceDirectory: string) {
+  scanImports(@Body() body: CreateDto) {
     try {
-      this.appService.transferFiles(sourceDirectory);
+      this.appService.transferFiles(body.sourceDirectory);
       return this.appService.scanFileImports();
     } catch (error) {
       console.log(error);
