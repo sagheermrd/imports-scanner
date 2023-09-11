@@ -58,6 +58,37 @@ i.e.
 
 `http://localhost:3000/swagger-docs`
 
+simple curl request example
+
+`
+curl -X 'POST' \
+  'http://localhost:3000/api/scan-imports' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "sourceDirectory": "/Users/sagheer/Downloads/challenge-SA/examples/example3" /* path to directory */
+}
+`
+Success response
+
+`
+{
+  "data": [
+    {
+      "title": "ex1.lib",
+      "children": [
+        {
+          "title": "ex3.lib"
+        }
+      ]
+    },
+    {
+      "title": "ex2.lib"
+    }
+  ],
+  "rootfile": "root.prog"
+}
+`
 
 ## Possible edge cases
 
