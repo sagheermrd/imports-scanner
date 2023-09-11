@@ -54,6 +54,11 @@ i.e.
 
 `POST: localhost/api/scan-imports` with request body `{sourceDirectory:string}`
 
+`Swagger`: swagger is configured for api documentation. here is the endpoint to acces the swagger document
+
+`http://localhost:3000/swagger-docs`
+
+
 ## Possible edge cases
 
 Format other than `import path/to/library.lib;` is not supported, e.g. `import * from path/to/library.lib;`(Invalid).
@@ -67,4 +72,4 @@ Algorithm steps
 * Read file `root.prog` line by line
 * Record only lines started with `imports` and keep them in an array. array containg paths to the referencing lib files.
 * Recursivily read the referencing lib files from the array from previouse step and retrieve the referencing imports unless no referecing file left terminate Recursive call
-* Formate response and return the Json response to UI
+* Format response and return the Json response to UI
