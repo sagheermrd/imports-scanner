@@ -63,8 +63,8 @@ Format other than `import path/to/library.lib;` is not supported, e.g. `import *
 
 ## Software design
 Algorithm steps
-* Copies directory containing `root.prog` and its referencing libraries from a path to service directory `file_dist`
+* Copies directory containing `root.prog` including its referencing libraries from a path to service directory `file_dist`
 * Read file `root.prog` line by line
-* List lines started with `imports` and take libraries including path
-* Recursivily read the referencing lib files and retrieve the referencing imports unless no referecing file left terminate Recursive call
+* Record only lines started with `imports` and keep them in an array. array containg paths to the referencing lib files.
+* Recursivily read the referencing lib files from the array from previouse step and retrieve the referencing imports unless no referecing file left terminate Recursive call
 * Formate response and return the Json response to UI
