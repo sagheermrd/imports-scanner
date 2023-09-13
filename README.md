@@ -59,12 +59,14 @@ i.e.
 Format other than `import path/to/library.lib;` is not supported, e.g. `import * from path/to/library.lib;`(Invalid).
 
 - if a library is imported in a file and that library itself is missing in the transfered directory, an error message will be thrown.
-- considering the program file name should be `root.prog`, otherwise it will not be processed. However the name can be updated in the `DefaultRootFileName` const. However if the filename is frequently changing then a new params can be introduced in the request model.
+- considering the program file name should be `root.prog`, otherwise it will not be processed. However the name can be updated in utils.ts `DEFAULT_ROOT_FILE_NAME` const. However if the filename is frequently changing then a new property can be added to the request body and adjustment will be needed in service.
 
 ## Software design
+
 Algorithm steps
-* Copies directory containing `root.prog` including its referencing libraries from a path to service directory `file_dist`
-* Read file `root.prog` line by line
-* Record only lines started with `imports` and keep them in an array. array containg paths to the referencing lib files.
-* Recursivily read the referencing lib files from the array from previouse step and retrieve the referencing imports unless no referecing file left terminate Recursive call
-* Formate response and return the Json response to UI
+
+- Copies directory containing `root.prog` including its referencing libraries from a path to service directory `file_dist`
+- Read file `root.prog` line by line
+- Record only lines started with `imports` and keep them in an array. array containg paths to the referencing lib files.
+- Recursivily read the referencing lib files from the array from previouse step and retrieve the referencing imports unless no referecing file left terminate Recursive call
+- Formate response and return the Json response to UI

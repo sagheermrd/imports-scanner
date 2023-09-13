@@ -5,9 +5,7 @@ import {
   NotFoundException,
   InternalServerErrorException,
 } from '@nestjs/common';
-
-export const TARGET_DIRECTORY = 'files_dist';
-const DefaultRootFileName = 'root.prog';
+import { TARGET_DIRECTORY, DEFAULT_ROOT_FILE_NAME } from './utils/utils';
 
 export type TreeNodeDto = {
   title: string;
@@ -18,12 +16,12 @@ export type TreeNodeDto = {
 export class AppService {
   scanFileImports() {
     // Assuming root file name is the default name 'root.prog'
-    const filePath = `${TARGET_DIRECTORY}/${DefaultRootFileName}`;
+    const filePath = `${TARGET_DIRECTORY}/${DEFAULT_ROOT_FILE_NAME}`;
     this.validateFile(filePath);
     const imports = this.readImports(filePath);
     return {
       data: this.mapNestedImports(imports, filePath),
-      rootfile: DefaultRootFileName,
+      rootfile: DEFAULT_ROOT_FILE_NAME,
     };
   }
 
@@ -32,10 +30,9 @@ export class AppService {
       const absolutePath = path.resolve(path.dirname(filePath), importPath);
       const title =
         path.parse(absolutePath).name + path.parse(absolutePath).ext;
-      const nestedImports = this.readImports(
-        TARGET_DIRECTORY +
-          absolutePath.split(TARGET_DIRECTORY).pop().replace(';', ''),
-      );
+
+      const nestedImports = this.readImports(absolutePath);
+
       let children: TreeNodeDto[];
       if (nestedImports.length) {
         children = this.mapNestedImports(nestedImports, filePath);
@@ -50,6 +47,7 @@ export class AppService {
     const imports: string[] = [];
 
     for (const line of lines) {
+      // Assuming import statement structure as 'import ./path/file.lib'
       if (line.trim().startsWith('import')) {
         const importlib = line.split('import');
         imports.push(importlib.pop().trim().replace(';', ''));

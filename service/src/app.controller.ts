@@ -5,7 +5,7 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import { AppService } from './app.service';
-import { CreateDto } from 'dto/common';
+import { CreateDto } from './dto/common';
 
 @Controller('/api')
 export class AppController {
